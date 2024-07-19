@@ -1,12 +1,12 @@
 pipeline {
-    agent {
-        docker { image 'openjdk:11-jdk-slim' }
+  agent {
+    docker { image 'node:16-alpine' }
+  }
+  stages {
+    stage('Test') {
+      steps {
+        sh 'node --version'
+      }
     }
-    stages {
-        stage('Check Java Version') {
-            steps {
-                sh 'java -version'
-            }
-        }
-    }
+  }
 }
