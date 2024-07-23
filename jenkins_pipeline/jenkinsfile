@@ -2,16 +2,9 @@ pipeline {
   agent any
   stages {
     stage('Docker Image Build') {
-      agent {
-        dockerfile {
-            filename 'Dockerfile'
-            dir '.'
-        }
-      }
+      
       steps {
-        script {
-            def customImage = docker.build("student_application:latest")
-        }
+        sh 'ls -al'
       }
     }
   }
