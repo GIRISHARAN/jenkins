@@ -1,11 +1,17 @@
 pipeline {
-  agent {
-    docker { image 'node:16-alpine' }
-  }
+  agent any
   stages {
-    stage('Test') {
+    stage('Docker Image Build') {
+      agent {
+        dockerfile {
+            filename 'Dockerfile'
+            dir '.'
+        }
+      }
       steps {
-        sh 'node --version'
+        script {
+            def customImage = docker.build("student_application:latest")
+        }
       }
     }
   }
