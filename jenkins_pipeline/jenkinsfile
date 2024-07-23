@@ -10,7 +10,7 @@ pipeline {
       }
       steps {
         script {
-            def customImage = docker.build("student_application:latest")
+            sh 'docker build -t studentimage .'
         }
       }
     }
