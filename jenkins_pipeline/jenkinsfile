@@ -1,18 +1,20 @@
 pipeline {
-  agent any
-  stages {
-    stage('Docker Image Build') {
-      agent {
-        dockerfile {
-            filename 'Dockerfile'
-            dir './jenkins_pipeline'
+    agent any
+    stages {
+        stage('Docker Image Build') {
+            steps {
+                // Change to the directory containing the Dockerfile
+                dir('jenkins_pipeline') {
+                    // Build the Docker image
+                    sh 'docker build -t studentimage .'
+                }
+            }
         }
-      }
-      steps {
-        script {
-            sh 'docker build -t studentimage .'
+        stage('Test Endpoint') {
+            steps {
+                // Example of using curl to test an HTTP endpoint
+                sh 'curl -I http://localhost:9090/students/welcome'
+            }
         }
-      }
     }
-  }
 }
